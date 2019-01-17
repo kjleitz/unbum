@@ -6,14 +6,12 @@ default: &default
   public_output_path: packs
   cache_path: tmp/cache/webpacker
 
-  # Additional paths webpack should lookup modules
-  # ['app/assets', 'engine/foo/app/assets']
-  resolved_paths: []
-
   # Reload manifest.json on all requests so we reload latest compiled packs
   cache_manifest: false
 
   extensions:
+    - .tsx
+    - .ts
     - .vue
     - .js
     - .sass
@@ -50,7 +48,6 @@ development:
       'Access-Control-Allow-Origin': '*'
     watch_options:
       ignored: /node_modules/
-
 
 test:
   <<: *default

@@ -1,22 +1,21 @@
 <template>
-  <div id="app">
-    <p>{{ message }}</p>
+  <div class="unbum-app">
+    <UnbumContainer/>
   </div>
 </template>
 
-<script>
-export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
-    }
-  }
-}
+<script lang="ts">
+import Vue from 'vue';
+import UnbumContainer from 'unbum/components/UnbumContainer.vue';
+
+export default Vue.extend({
+  components: {
+    UnbumContainer,
+  },
+});
 </script>
 
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
+<style lang="sass">
+body, body *
+  box-sizing: content-box
 </style>
