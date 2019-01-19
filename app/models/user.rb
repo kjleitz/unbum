@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6, maximum: 100 }
+  # validates :password, confirmation: true
 
   before_save :touch_last_unbummed_at!, if: :days_unbummed_changed?
 

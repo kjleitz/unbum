@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <%= csp_meta_tag %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <title><%= content_for(:title) || 'unbum' %></title>
+  <%= content_for :head %>
+</head>
+<body>
+  <header>
+    <nav class="header-nav navbar navbar-expand-xl navbar-light bg-light">
+      <a class="navbar-brand" href="#">unbum</a>
+      <% if @logged_in %>
+        <span class="nav-item text-muted"><%= "logged in as #{@current_user.username}" %></span>
+        <%= link_to 'log out', logout_path, class: 'nav-item nav-link' %>
+      <% else %>
+        <%= link_to 'log in', login_path, class: 'nav-item nav-link' %>
+        <%= link_to 'sign up', signup_path, class: 'nav-item nav-link' %>
+      <% end %>
+    </nav>
+    <div class="flash-area">
+      <% flash.keys.each do |flash_type| %>
+        <% messages = [flash[flash_type]].flatten %>
+        <% messages.each do |message| %>
+          <div class="alert <%= flash_type -%> alert-<%= { error: 'danger', notice: 'info' }[flash_type.to_sym] || flash_type -%>">
+            <%= message %>
+          </div>
+        <% end %>
+      <% end %>
+    </div> 
+  </header>
+  <main class="container">
+    <%= yield %>
+  </main>
+  <footer class="footer-nav">
+    <div class="github-link">
+      <%= link_to 'source code', 'https://github.com/kjleitz/unbum' %>
+    </div>
+    <div class="license-desc">
+      license: MIT
+    </div>
+  </footer>
+  <style>
+    .header-nav {
+      z-index: 10;
+      margin-bottom: 2em;
+    }
+    .footer-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      margin: 1em;
+      z-index: 10;
+    }
+  </style>
+</body>
+</html>

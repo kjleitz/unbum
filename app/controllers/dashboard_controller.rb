@@ -1,3 +1,3 @@
-class DashboardController < ActionController::Base # actually renders HTML; not an API controller, per se
+class DashboardController < RenderedController
   def index; end
 end

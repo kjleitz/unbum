@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < RenderedController
   helper_method :current_user, :logged_in?
   before_action :set_user, only: [:update]
 
@@ -10,26 +10,29 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       set_current_user(@user)
-      render status: 201, json: { id: @user.id, username: @user.username }
+      flash[:success] = "Successfully created user '#{@user.username}'"
+      redirect_to root_path
     else
-      render status: 400, json: { errors: @user.errors.full_messages }
+      flash[:error] = @user.errors.full_messages
+      redirect_to signup_path
     end
   end
 
   def update
     if !@user
-      render status: 404, json: { errors: ['User not found'] }
+      render status: 404
     elsif @user.update(user_params)
-      render status: 200, json: { id: @user.id, username: @user.username }
+      flash[:success] = "Successfully updated user '#{@user.username}'"
+      redirect_to root_path
     else
-      render status: 400, json: { errors: @user.errors.full_messages }
+      flash[:error] = @user.errors.full_messages
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :days_unbummed)
+    params.require(:user).permit(:username, :password, :password_confirmation, :days_unbummed)
   end
 
   def set_user

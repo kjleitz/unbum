@@ -1,13 +1,5 @@
 <template>
   <div class="unbum-container">
-    <div class="reset-area">
-      <button
-        class="reset"
-        @click="daysUnbummed = 0"
-      >
-        i fucked up
-      </button>
-    </div>
     <div class="button-area">
       <Incrementor
         v-model="daysUnbummed"
@@ -16,6 +8,12 @@
       <div class="days-unbummed">
         {{ daysUnbummed }} DAYS UNBUMMED
       </div>
+      <button
+        class="reset"
+        @click="daysUnbummed = 0"
+      >
+        i fucked up
+      </button>
     </div>
   </div>
 </template>
@@ -39,18 +37,23 @@ export default Vue.extend({
 
 <style lang="sass" scoped>
 .unbum-container
-  .reset-area
+  .button-area
     position: fixed
     top: 0
     right: 0
-    margin: 1em
-  .button-area
+    bottom: 0
+    left: 0
     display: flex
     justify-content: center
     align-items: center
     flex-direction: column
     width: 100%
     height: 100vh
+    .reset
+      position: absolute
+      bottom: 0
+      right: 0
+      margin: 1em
     .days-unbummed-counter
       margin: 1em
     .days-unbummed
