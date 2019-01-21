@@ -1,7 +1,8 @@
 <template>
   <div class="incrementor">
     <button
-      class="incrementor-button"
+      v-bind="$attrs"
+      class="incrementor-button btn btn-primary"
       @click="$emit('input', value + 1)"
     >
       +
@@ -25,4 +26,5 @@ export default Vue.extend({
 <style lang="sass" scoped>
 .incrementor-button
   font-size: 3em
+  padding: 0.5em 1em
 </style>

@@ -22,8 +22,13 @@ class UsersController < RenderedController
     if !@user
       render status: 404
     elsif @user.update(user_params)
-      flash[:success] = "Successfully updated user '#{@user.username}'"
-      redirect_to root_path
+      respond_to do |format|
+        format.json { render json: @user }
+        format.html do
+          flash[:success] = "Successfully updated user '#{@user.username}'"
+          redirect_to root_path
+        end
+      end
     else
       flash[:error] = @user.errors.full_messages
     end

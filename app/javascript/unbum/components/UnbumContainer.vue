@@ -3,13 +3,17 @@
     <div class="button-area">
       <Incrementor
         v-model="daysUnbummed"
+        :disabled="submitting || alreadyUnbummed"
         class="days-unbummed-counter"
       />
       <div class="days-unbummed">
         {{ daysUnbummed }} DAYS UNBUMMED
       </div>
+      <div class="last-unbummed">
+        last unbummed: {{ lastUnbummed.toLowerCase() }}
+      </div>
       <button
-        class="reset"
+        class="reset btn btn-danger"
         @click="daysUnbummed = 0"
       >
         i fucked up
@@ -21,6 +25,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import Incrementor from 'unbum/components/Incrementor.vue';
+import config from 'unbum/config';
+import { humanDate, isToday } from 'base/concerns/dateUtils';
 
 export default Vue.extend({
   components: {
@@ -29,9 +35,43 @@ export default Vue.extend({
 
   data() {
     return {
-      daysUnbummed: 0,
+      daysUnbummed: config.daysUnbummed,
+      lastUnbummedAt: config.lastUnbummedAt,
+      submitting: false,
     };
   },
+
+  computed: {
+    lastUnbummed(): string {
+      return humanDate(this.lastUnbummedAt);
+    },
+
+    alreadyUnbummed(): boolean {
+      return isToday(this.lastUnbummedAt);
+    },
+  },
+
+  watch: {
+    daysUnbummed(newVal: number, oldVal: number): void {
+      if (newVal === oldVal) return;
+      this.lastUnbummedAt = new Date();
+      fetch(`/users/${config.userId}`, {
+        method: 'PATCH',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          [config.csrfParam]: config.csrfToken,
+          days_unbummed: newVal,
+        }),
+      });
+    },
+  },
+
+  // mounted(): {
+
+  // },
 });
 </script>
 
@@ -58,4 +98,7 @@ export default Vue.extend({
       margin: 1em
     .days-unbummed
       font-size: 2em
+    .last-unbummed
+      // font-style: italic
+      color: rgba(0, 0, 0, 0.25)
 </style>
