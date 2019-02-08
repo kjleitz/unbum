@@ -11,7 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "baseUrl": "./app/javascript",
-    "noImplicitThis": true
+    "strict": true
   },
   "include": [
     "app/javascript/**/*.ts",

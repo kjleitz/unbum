@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@babel/core": "^7.1.0",
-    "@rails/webpacker": "3.5.5",
+    "@rails/webpacker": "3.5",
     "@types/node": "^10.5.5",
     "@types/underscore": "^1.8.8",
     "@types/vue": "^2.0.0",
@@ -39,7 +39,7 @@
     "vue-eslint-parser": "^3.2.2",
     "vue-jest": "^2.6.0",
     "webpack-bundle-analyzer": "^3.0.2",
-    "webpack-dev-server": "^2.11"
+    "webpack-dev-server": "2.11.2"
   },
   "name": "unbum",
   "repository": {

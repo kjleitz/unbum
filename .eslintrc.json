@@ -42,7 +42,6 @@
       "allowDeclarations": true,
       "allowDefinitionFiles": true
     }],
-    "typescript/no-non-null-assertion": 2,
     "typescript/no-parameter-properties": 2,
     "typescript/no-triple-slash-reference": 2,
     "typescript/no-type-alias": 0,
@@ -51,6 +50,7 @@
     "typescript/no-var-requires": 2,
     "typescript/prefer-namespace-keyword": 2,
     "typescript/type-annotation-spacing": 0,
+    "typescript/no-non-null-assertion": 1,
     "no-multi-spaces": 0,
     "key-spacing": 0,
     "no-undef": 0,

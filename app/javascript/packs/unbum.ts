@@ -1,9 +1,7 @@
 import Vue from 'vue';
-import App from 'unbum/App.vue';
+import App from 'UnbumApp.vue';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // const el = document.body.appendChild(document.createElement('div'));
-
   /* eslint-disable no-new */
   new Vue({
     el: '#unbum-hook',

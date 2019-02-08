@@ -4,7 +4,7 @@ let _userId: number;
 let _daysUnbummed: number;
 let _lastUnbummedAt: Date;
 
-const getMeta = (name: string): string => document.querySelector(`meta[name="${name}"]`).getAttribute('content');
+const getMeta = (name: string): string => document.querySelector(`meta[name="${name}"]`)!.getAttribute('content')!;
 
 const config = {
   get csrfParam(): string {
@@ -24,7 +24,6 @@ const config = {
 
   get daysUnbummed(): number {
     _daysUnbummed = _daysUnbummed || parseInt(getMeta('days-unbummed'), 10);
-    console.log(_daysUnbummed)
     return _daysUnbummed;
   },
 
